@@ -1,0 +1,51 @@
+@font-face {
+  font-family: Modernist;
+  src: url(../fonts/Modernist/Modernist.otf)
+}
+
+@font-face {
+  font-family: Signika;
+  src: url(../fonts/Signika/Light.ttf)
+}
+
+.home-container {
+  margin-top: 50px;
+}
+
+.big-title-container {
+  display: inline-block;
+  padding: 10px;
+  border-top: 1px solid #d8d8d8;
+  border-right: 1px solid #d8d8d8;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.Posts-Title {
+  font-family: Modernist;
+  font-size: 34px;
+  margin-top: 9px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-family: Signika;
+  font-size: 24px;
+  color: #303030;
+  margin-bottom: 9px;
+}
+
+.post-preview:nth-child(odd){
+  float: left;
+}
+
+.post-preview:nth-child(even){
+  float: right;
+}
+
+.post-preview {
+  border: 1px solid #d8d8d8;
+  border-radius: 2px;
+  width: 485px;
+  height: 300px;
+  margin-top: 30px;
+}

@@ -1,0 +1,1 @@
+select * from posts order by id desc limit 25 offset $1;
