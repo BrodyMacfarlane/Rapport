@@ -6,7 +6,8 @@ create table posts(
     description varchar(150),
     category varchar(20),
     contents varchar(50000),
-    img varchar(500)
+    img varchar(500),
+    ttr int
 )
 
 -- CATEGORIES

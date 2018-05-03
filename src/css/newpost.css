@@ -48,6 +48,7 @@
 
 .title-text {
   margin-top: 18px;
+  width: 100%;
 }
 
 .title-text div {
@@ -84,13 +85,17 @@
   float: right;
 }
 
+.category-container > div {
+  display: inline-block;
+}
+
 .category {
+  vertical-align: top;
   margin: 15px 23px 15px 0px;
   text-align: center;
   width: 200px;
   height: 80px;
   line-height: 80px;
-  display: inline-block;
   border: 1px solid #c5c5c5;
   border-radius: 3px;
   font-family: Signika;
@@ -110,8 +115,17 @@
   width: 33px;
 }
 
+.catAddSvg {
+  line-height: 72px;
+}
+
+.catAddSvg img {
+  vertical-align: bottom;
+  cursor: pointer;
+}
+
 .nodisplay {
-  display: none;
+  display: none !important;
 }
 
 .small-add {
@@ -125,11 +139,15 @@
   margin-top: 6px;
 }
 
-.add-input{
-  padding: 5px;
-  margin: 5px;
-  float: left;
-  width: 60%;
+.add-input {
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+}
+
+.add-input-red {
+  color: #FFF;
 }
 
 #fatty {

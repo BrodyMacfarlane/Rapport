@@ -44,8 +44,77 @@
 
 .post-preview {
   border: 1px solid #d8d8d8;
-  border-radius: 2px;
+  /* border-radius: 2px; */
   width: 485px;
-  height: 300px;
+  height: 250px;
   margin-top: 30px;
+  position: relative;
+}
+
+.thumb {
+  height: 250px;
+  width: 200px;
+  object-fit: cover;
+}
+
+.post-preview > div {
+  display: inline-block;
+}
+
+.post-content {
+  vertical-align: top;
+  padding: 15px 12px 15px 12px;
+  width: 261px;
+  height: 220px;
+}
+
+.post-title {
+  font-family: Modernist;
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #d8d8d8;
+}
+
+.post-description {
+  font-family: Signika;
+  color: #6C6C6C;
+  font-size: 16px;
+  margin-top: 6px;
+}
+
+.post-low {
+  position: absolute;
+  bottom: 5px;
+}
+
+.post-low > div {
+  display: inline-block;
+}
+
+.post-details {
+  font-size: 13px;
+  position: relative;
+  bottom: 12px;
+  left: 10px;
+  line-height: 20px;
+}
+
+.date {
+  color: #6C6C6C;
+}
+
+.me-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin: 3px;
+}
+
+.profile-pic {
+  width: 56px;
+  height: 56px;
+  border-bottom: 1px solid #C10040;
+  border-radius: 50%;
 }

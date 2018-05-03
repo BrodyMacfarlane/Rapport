@@ -8,7 +8,7 @@ export default class NewPost extends Component {
   constructor(){
     super()
     this.state = {
-      categories: [{category: "Technology"}],
+      categories: [{category: null}],
       catPos: 0,
       addedCat: '',
       showCatInput: false,
@@ -32,6 +32,7 @@ export default class NewPost extends Component {
     this.updateContentInputValue = this.updateContentInputValue.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.reselectCat = this.reselectCat.bind(this)
+    this.handleEnter = this.handleEnter.bind(this)
   }
   componentDidMount(){
     axios.get('/api/getCategories')
@@ -79,9 +80,9 @@ export default class NewPost extends Component {
 
 
   componentDidUpdate(){
-    console.log(this.state.files)
+    // console.log(this.state.files)
     // console.log(this.state.catPos)
-    // console.log(this.state.categorySelected)
+    console.log(this.state.categorySelected)
   }
 
 
@@ -96,6 +97,9 @@ export default class NewPost extends Component {
   }
   toggleInput(){
     this.setState({showCatInput: true})
+    setTimeout(() => {
+      this.catInput.focus()
+    }, 100)
   }
   handleAdd(){
     if(this.state.showCatInput === true && this.state.categoryInputValue){
@@ -137,6 +141,13 @@ export default class NewPost extends Component {
 
 
   handleSubmit(){
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let d = new Date();
+    let utc = d.getTime() - (d.getTimezoneOffset() * 60000);
+    let nd = new Date(utc)
+    let month = nd.getMonth();
+    let day = nd.getDate();
+    let postDate = months[month] + " " + day;
     if(this.state.categorySelected && this.state.titleInputValue && this.state.authorInputValue && this.state.descriptionInputValue && this.state.contentInputValue && this.state.imgurl){
       this.setState({
         sendingPost: true
@@ -144,10 +155,12 @@ export default class NewPost extends Component {
       axios.post('/api/newPost', {
         title: this.state.titleInputValue,
         author: this.state.authorInputValue,
-        date: new Date(),
+        date: postDate,
         description: this.state.descriptionInputValue,
         category: this.state.categoryInputValue ? this.state.categoryInputValue : this.state.categories[this.state.catPos].category,
-        content: this.state.contentInputValue
+        content: this.state.contentInputValue,
+        imgurl: this.state.imgurl,
+        ttr: Math.floor(this.state.contentInputValue.split(" ").length/250)
       })
       .then((response) => {
         if(response.status === 200){
@@ -164,7 +177,13 @@ export default class NewPost extends Component {
       });
     }
   }
-
+  handleEnter(e) {
+    if (e.key === 'Enter') {
+      this.setState({
+        categorySelected: this.state.categoryInputValue
+      })
+    }
+  }
   reselectCat(){
     if(this.state.categoryInputValue){
       this.setState({
@@ -223,10 +242,10 @@ export default class NewPost extends Component {
           }
 
           
-          <div onClick={this.reselectCat} className={this.state.categorySelected === this.state.categoryInputValue ? "category category-red" : "category category-adder"}>
+          <div onClick={this.reselectCat} className={this.state.categorySelected === this.state.categoryInputValue ? "category category-red" : this.state.showCatInput ? "category" : "nodisplay"}>
             <div onClick={this.toggleInput} className={this.state.addedCat ? "nodisplay" : "addCat"}>
               <div className={this.state.showCatInput ? "add-input-container" : "nodisplay"}>
-                <input value={this.state.categoryInputValue} onChange={e => this.updateCategoryInputValue(e)} maxLength="20" placeholder="Category name." className="add-input" type="text"/>
+                <input ref={(input) => this.catInput = input} value={this.state.categoryInputValue} onChange={e => this.updateCategoryInputValue(e)} maxLength="20" placeholder="Type category here." className={this.state.categorySelected === this.state.categoryInputValue ? "add-input-red add-input": "add-input"} onKeyPress={this.handleEnter} type="text"/>
               </div>
             </div>
             <div className={this.state.addedCat ? "category-title" : "nodisplay"}>
@@ -234,10 +253,11 @@ export default class NewPost extends Component {
             </div>
           </div>
 
-          <div className="catAddSvg" onClick={this.handleAdd}>
+          <div className="catAddSvg" onClick={this.toggleInput}>
             <img src={addSvg} className="small-add-svg"/>
           </div>
 
+            {/* Need the handleAdd onclick */}
 
         </div>
         <div className="input-title-container">
