@@ -66,6 +66,7 @@
   padding: 15px 12px 15px 12px;
   width: 261px;
   height: 220px;
+  overflow: hidden;
 }
 
 .post-title {
@@ -75,6 +76,7 @@
   font-weight: bold;
   padding-bottom: 6px;
   border-bottom: 1px solid #d8d8d8;
+  overflow: hidden;
 }
 
 .post-description {
@@ -82,11 +84,17 @@
   color: #6C6C6C;
   font-size: 16px;
   margin-top: 6px;
+  height: 100px;
+  overflow: hidden;
 }
 
 .post-low {
+  width: 261px;
   position: absolute;
-  bottom: 5px;
+  z-index: 100;
+  bottom: 0px;
+  background-color: #FFF;
+  height: 64px;
 }
 
 .post-low > div {

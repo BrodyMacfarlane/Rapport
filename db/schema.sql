@@ -7,7 +7,8 @@ create table posts(
     category varchar(20),
     contents varchar(50000),
     img varchar(500),
-    ttr int
+    ttr int,
+    posturl varchar(80)
 )
 
 -- CATEGORIES

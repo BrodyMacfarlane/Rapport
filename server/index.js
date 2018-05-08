@@ -35,7 +35,7 @@ app.get('/api/getCategories', (req, res) => {
 app.post('/api/newPost', (req, res) => {
   const db = app.get('db')
   const data = req.body
-  db.new_post([data.title, data.author, data.date, data.description, data.category, data.content, data.imgurl, data.ttr]).then(response => {
+  db.new_post([data.title, data.author, data.date, data.description, data.category, data.content, data.imgurl, data.ttr, data.posturl]).then(response => {
     res.status(200).send(response)
   })
 })

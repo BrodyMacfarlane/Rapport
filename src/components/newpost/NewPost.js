@@ -24,7 +24,6 @@ export default class NewPost extends Component {
     }
     this.selectCat = this.selectCat.bind(this)
     this.toggleInput = this.toggleInput.bind(this)
-    this.handleAdd = this.handleAdd.bind(this)
     this.updateCategoryInputValue = this.updateCategoryInputValue.bind(this)
     this.updateTitleInputValue = this.updateTitleInputValue.bind(this)
     this.updateAuthorInputValue = this.updateAuthorInputValue.bind(this)
@@ -83,12 +82,13 @@ export default class NewPost extends Component {
     // console.log(this.state.files)
     // console.log(this.state.catPos)
     console.log(this.state.categorySelected)
+    // console.log(this.state.postUrl)
   }
 
 
   selectCat(e){
     this.setState({
-      catPos: parseInt(e.target.dataset.index)
+      catPos: parseInt(e.target.dataset.index),
     }, () => {
       this.setState({
         categorySelected: this.state.categories[this.state.catPos].category
@@ -101,17 +101,6 @@ export default class NewPost extends Component {
       this.catInput.focus()
     }, 100)
   }
-  handleAdd(){
-    if(this.state.showCatInput === true && this.state.categoryInputValue){
-      let inLower = this.state.categoryInputValue.toLowerCase()
-      let strFirst = inLower[0].toUpperCase()
-      this.setState({
-        categorySelected: strFirst + inLower.split("").splice(1,inLower.length).join(""),
-        addedCat: strFirst + inLower.split("").splice(1,inLower.length).join("")
-      })
-    }
-  }
-
 
   updateCategoryInputValue(e){
     this.setState({
@@ -157,10 +146,11 @@ export default class NewPost extends Component {
         author: this.state.authorInputValue,
         date: postDate,
         description: this.state.descriptionInputValue,
-        category: this.state.categoryInputValue ? this.state.categoryInputValue : this.state.categories[this.state.catPos].category,
+        category: this.state.categorySelected.toLowerCase()[0].toUpperCase() + this.state.categorySelected.toLowerCase().split("").splice(1,this.state.categorySelected.toLowerCase().length).join(""),
         content: this.state.contentInputValue,
         imgurl: this.state.imgurl,
-        ttr: Math.floor(this.state.contentInputValue.split(" ").length/250)
+        ttr: Math.floor(this.state.contentInputValue.split(" ").length/250),
+        posturl: this.state.titleInputValue.split(" ").join("-").replace(/[^0-9a-z\-]/gi, '')
       })
       .then((response) => {
         if(response.status === 200){
@@ -256,8 +246,6 @@ export default class NewPost extends Component {
           <div className="catAddSvg" onClick={this.toggleInput}>
             <img src={addSvg} className="small-add-svg"/>
           </div>
-
-            {/* Need the handleAdd onclick */}
 
         </div>
         <div className="input-title-container">
