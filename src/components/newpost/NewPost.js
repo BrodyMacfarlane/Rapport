@@ -5,10 +5,10 @@ import '../../css/newpost.css';
 import addSvg from '../../img/add.svg';
 
 export default class NewPost extends Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
-      categories: [{category: null}],
+      categories: this.props.categories,
       catPos: 0,
       addedCat: '',
       showCatInput: false,
@@ -34,14 +34,9 @@ export default class NewPost extends Component {
     this.handleEnter = this.handleEnter.bind(this)
   }
   componentDidMount(){
-    axios.get('/api/getCategories')
-      .then((response) => {
-        this.setState({
-          categories: response.data,
-          categorySelected: this.state.categories[0].category
-        })
-        console.log(this.state.categories)
-      })
+    this.setState({
+      categorySelected: this.state.categories[0].category
+    })
   }
 
   onDrop(files) {
@@ -149,7 +144,7 @@ export default class NewPost extends Component {
         category: this.state.categorySelected.toLowerCase()[0].toUpperCase() + this.state.categorySelected.toLowerCase().split("").splice(1,this.state.categorySelected.toLowerCase().length).join(""),
         content: this.state.contentInputValue,
         imgurl: this.state.imgurl,
-        ttr: Math.floor(this.state.contentInputValue.split(" ").length/250),
+        ttr: Math.ceil(this.state.contentInputValue.split(" ").length/250),
         posturl: this.state.titleInputValue.split(" ").join("-").replace(/[^0-9a-z\-]/gi, '')
       })
       .then((response) => {

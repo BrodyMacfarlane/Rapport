@@ -122,3 +122,17 @@ input:focus {
 .new-post-btn-tilted {
   transform: rotate(45deg);
 }
+
+.category-list {
+  position: absolute;
+  top: 61px;
+  font-family: Signika;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.category-name {
+  display: inline-block;
+  padding: 3px;
+  margin: 15px 6px 15px 6px;
+}

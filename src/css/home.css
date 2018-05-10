@@ -34,11 +34,11 @@
   margin-bottom: 9px;
 }
 
-.post-preview:nth-child(odd){
+.post-link:nth-child(odd){
   float: left;
 }
 
-.post-preview:nth-child(even){
+.post-link:nth-child(even){
   float: right;
 }
 
